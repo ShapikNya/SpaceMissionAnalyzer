@@ -13,7 +13,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 311,
+          "DockedWidth": 200,
           "SelectedChildIndex": 0,
           "Children": [
             {
@@ -24,9 +24,9 @@
               "RelativeDocumentMoniker": "SpaceMissionAnalyzer\\Program.cs",
               "ToolTip": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalyzer\\Program.cs",
               "RelativeToolTip": "SpaceMissionAnalyzer\\Program.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAAwwOkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T20:56:50.612Z",
+              "WhenOpened": "2025-07-01T22:35:11.681Z",
               "EditorCaption": ""
             }
           ]

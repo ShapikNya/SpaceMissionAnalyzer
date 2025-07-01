@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Text.Json;
+
 
 namespace SpaceMissions
 {
@@ -26,6 +28,19 @@ namespace SpaceMissions
         Satellite = 2
     }
 
+    public enum MissionStatus
+    {
+        Active = 1,
+        Paused = 2,
+        Failed = 3
+    }
+
+    public interface IMissionDto
+    {
+        string ToJson();
+    }
+
+
     public class Person
     {
         private readonly int _id;
@@ -42,6 +57,12 @@ namespace SpaceMissions
             _id = id; 
             _name = name;
         }
+    }
+
+    public class AstronautDto
+    {
+        public string Name { get; set; }
+        public string Role { get; set; }
     }
 
     public class Spaceship
@@ -69,6 +90,15 @@ namespace SpaceMissions
             _id=id; _model= model; _maxWeight = maxWeight; _maxSpeed = maxSpeed; _fuelFlowRate= fuelFlowRate;
         }
     }
+
+
+    public class SpaceshipDto
+    {
+        public string Model { get; set; }
+        public double MaxSpeed { get; set; }
+    }
+
+
 
     public class Item
     {
@@ -236,18 +266,114 @@ namespace SpaceMissions
         {
             if (_name is null) throw new ArgumentNullException("name must be not null!");
             if (_budget == 0) throw new ArgumentNullException("budget must be not null!");
-            if (Spaceship is null) throw new ArgumentNullException("spaceship must be not null!");
+            if (_spaceship is null) throw new ArgumentNullException("spaceship must be not null!");
             if (_items.Count == 0) throw new ArgumentNullException("items must be not null!");
-            if (_astronauts.Count == 0) throw new ArgumentNullException("astronauts must be not null!");
+            if (_astronauts.Count == 0 || _astronauts == null) throw new ArgumentNullException("astronauts must be not null!");
             if (_missionType is null) throw new ArgumentNullException("missiontype must be not null!");
 
 
             //СОЗДАНИЕ МИССИЙ
-
-
         }
 
+    }
 
+    public abstract class Mission
+    {
+        private readonly int _id; public int Id { get => _id; }
+        private readonly string _name;  public string Name { get => _name; }
+        private readonly DateTime _startDate; public DateTime StartDate { get => _startDate; }
+        private DateTime? _endDate; public DateTime? EndDate { get => _endDate; }
+        private readonly List<(Person _astronaut, string _role)> _astronauts; public List<(Person _astronaut, string _role)> Astronauts { get => _astronauts; }
+        private readonly Spaceship _spaceship; public Spaceship Spaceship { get => _spaceship; }
+        private readonly double _totalCost; public double TotalCost { get => _totalCost; }
+        private MissionStatus _missionStatus; public MissionStatus MissionStatus { get => _missionStatus; }
+
+        protected Mission(int id, string name, List<(Person astronaut, string role)> astronauts, Spaceship spaceship, double totalCost, DateTime startDate, MissionStatus status = MissionStatus.Active)
+        {
+            if (id < 0) throw new ArgumentException("id must be positive!");
+            if (name is null) throw new ArgumentNullException("name must be not null!");
+            if (astronauts.Count == 0 || astronauts == null) throw new ArgumentNullException("astronauts must be not null!");
+            if (spaceship is null) throw new ArgumentNullException("spaceship must be not null!");
+            if (totalCost == 0) throw new ArgumentNullException("budget must be not null!");
+
+            if (startDate > DateTime.Now.AddSeconds(10)) 
+            {
+                throw new ArgumentException("Incorrect date");
+            }
+
+            _id = id; _name = name; _astronauts = astronauts; _astronauts = astronauts; _totalCost = totalCost; _missionStatus = status;  _startDate = startDate;
+        }
+        public abstract IMissionDto GetStats();
+
+        public void SetStatus(MissionStatus status)
+        {
+            _missionStatus=status;
+        }
+
+    }
+
+    public class SatelliteMission : Mission
+    {
+        private bool _isOnOrbit; public bool IsOnOrbit { get => _isOnOrbit; }
+
+        public SatelliteMission(int id, string name, List<(Person astronaut, string role)> astronauts, Spaceship spaceship, double totalCost, DateTime startDate, bool isOnOrbit=false, MissionStatus status = MissionStatus.Active)
+            : base(id, name, astronauts, spaceship, totalCost, startDate, MissionStatus.Active)
+        {
+            _isOnOrbit = isOnOrbit;
+        }
+        public TimeSpan CalculateOrbitDecay(double dragCoefficient)
+        {
+            return TimeSpan.FromDays(100 / dragCoefficient);
+        }
+
+        public void DeploySatellite()
+        {
+            if (MissionStatus == MissionStatus.Active)
+            {
+                _isOnOrbit = !_isOnOrbit;
+            }
+            else throw new ArgumentException("Mission is not active!");
+        }
+
+        public override IMissionDto GetStats()
+        {
+            return new SatelliteMissionDto
+            {
+                Name = this.Name,
+                StartDate = this.StartDate,
+                EndDate = this.EndDate,
+                TravelTime = DateTime.Now - this.StartDate,
+                IsOnOrbit = this._isOnOrbit,
+                Status = this.MissionStatus,
+                Astronauts = this.Astronauts.Select(a => new AstronautDto
+                {
+                    Name = a._astronaut.Name,
+                    Role = a._role
+                }).ToList(),
+                Spaceship = new SpaceshipDto
+                {
+                    Model = this.Spaceship.Model,
+                    MaxSpeed = this.Spaceship.MaxSpeed
+                }
+            };
+        }
+    }
+
+    public class SatelliteMissionDto : IMissionDto
+    {
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public TimeSpan TravelTime { get; set; }
+        public bool IsOnOrbit { get; set; }
+        public MissionStatus Status { get; set; }
+
+
+        public List<AstronautDto> Astronauts { get; set; }
+        public SpaceshipDto Spaceship { get; set; }
+
+
+        public string ToJson() => JsonSerializer.Serialize(this); //
 
     }
 
@@ -255,7 +381,28 @@ namespace SpaceMissions
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
 
 
 
