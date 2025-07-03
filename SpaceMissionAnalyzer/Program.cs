@@ -6,10 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Text.Json;
+using SpaceMissions;
 
 
 namespace SpaceMissions
 {
+    public interface IMissionDto
+    {
+        string ToJson();
+    }
+
     public class WeightException : InvalidOperationException
     {
         public WeightException()
@@ -22,9 +28,15 @@ namespace SpaceMissions
             : base("Unable to add item. Not enough budget.") { }
     }
 
+    public class MissionStatusException : InvalidOperationException
+    {
+        public MissionStatusException()
+            : base("Mission is failed or finished.") { }
+    }
+
     public enum MissionType
     {
-        Planetary = 1,
+        Colonization = 1,
         Satellite = 2
     }
 
@@ -32,14 +44,9 @@ namespace SpaceMissions
     {
         Active = 1,
         Paused = 2,
-        Failed = 3
+        Failed = 3,
+        Finished = 4
     }
-
-    public interface IMissionDto
-    {
-        string ToJson();
-    }
-
 
     public class Person
     {
@@ -117,9 +124,9 @@ namespace SpaceMissions
             if ( id < 0) throw new ArgumentException("id must be positive!");
             if (name is null) throw new ArgumentException("name must be not null!");
             if (weight <= 0) throw new ArgumentException("weight must be greater than zero!");
-            if (price == null) _price = 0;
+            if (price == null) _price = 0; else _price = price;
 
-            _id = id; _name = name; _weight = weight; 
+                _id = id; _name = name; _weight = weight;
         }
     }
 
@@ -128,85 +135,72 @@ namespace SpaceMissions
     {
         private readonly int _id;
         private string _name;
-        private double? _budget;
+        private double _budget;
         private Spaceship _spaceship;
         private List<Item> _items;
-        private List<(Person _astronaut, string _role)> _astronauts;
+        private List<(Person _astronaut, string _role)> _astronauts; //В 4.7.2 нет record
         private MissionType? _missionType;
 
-        public string Name { get => _name; set { if (value is null) throw new ArgumentException("name must be not null!"); } }
-        public double? Budget { get => _budget; set { if (value <= 0) throw new ArgumentException("weight must be greater than zero!"); } }
-        public Spaceship Spaceship { get => _spaceship; set { _spaceship = value; } }
+        public int Id { get => _id; }
+        public string Name { get => _name; set { if (value is null) throw new ArgumentException("name must be not null!"); else _name = value; } }
+        public double Budget { get => _budget; set { if (value <= 0) throw new ArgumentException("budget must be greater than zero!"); else _budget = Budget; } }
+        public Spaceship Spaceship { get => _spaceship; set { if (value is null) throw new ArgumentNullException("spaceship must be not null!"); else _spaceship = value; } }
         public List<Item> Items { get => _items; set {
 
                 if (value is null) throw new ArgumentNullException("items must not null!");
 
-                double curentWeight = 0;
-                foreach (var itm in _items)
-                {
-                    curentWeight += itm.Weight;
-                }
-
-                double itemsWeight = 0;
+                double itemsWeight=0, itemsCost=0;
                 foreach (var itm in value)
                 {
                     itemsWeight += itm.Weight;
-                }
-
-                if (curentWeight < itemsWeight) throw new WeightException();
-
-
-
-                double curentCost = 0;
-                foreach (var itm in _items)
-                {
-                    curentCost += itm.Price;
-                }
-
-                double itemsCost = 0;
-                foreach (var itm in value)
-                {
                     itemsCost += itm.Price;
                 }
 
-                if (_budget-curentCost < itemsWeight) throw new BudgetException();
+                if (_spaceship.MaxWeight < itemsWeight) throw new WeightException();
+
+                if (_budget < itemsWeight) throw new BudgetException();
 
                 _items = value;
             }
         }
-        public List<(Person _astronaut, string _role)> Astronauts { get => _astronauts; set { _astronauts = value; } }
+        public List<(Person _astronaut, string _role)> Astronauts { get => _astronauts; set { if (value is null) throw new ArgumentNullException("astronauts must be not null!"); _astronauts = value; } }
         public MissionType? MissionType { get => _missionType; set { _missionType = value; } }
 
         public PrepareMission(int id)
         {
             if (id < 0) throw new ArgumentException("id must be positive!");
             _id = id;
+
+            _items = new List<Item>();
+            _astronauts = new List<(Person _astronaut, string _role)>();
         }
 
-        public PrepareMission(int id, double? budget, Spaceship spaceship, List<Item> items, List<(Person _astronaut, string _role)> astronauts, MissionType? missionType)
+        public PrepareMission(int id, string name, MissionType? missionType, Spaceship spaceship = null, List<Item> items = null, List<(Person _astronaut, string _role)> astronauts = null, double budget = 0)
         {
             if (id < 0) throw new ArgumentException("id must be positive!");
-            if (budget == null) budget = 0;
+            if (name is null) throw new ArgumentException("name must be not null!");
+            if (budget <= 0) throw new ArgumentException("budget must be greater than zero!");
 
-            _id = id; _spaceship = spaceship; _items = items; _astronauts = astronauts; _missionType = missionType;
+            _id = id; _name = name; _budget = budget; _spaceship = spaceship; _items = items; _astronauts = astronauts; _missionType = missionType;
+
+            if (items == null) _items = new List<Item>();
+            if (astronauts == null) _astronauts = new List<(Person _astronaut, string _role)>();
         }
 
         public void AddItem(Item item)
         {
             if (item is null) throw new ArgumentNullException("item must not null!");
 
-            double curentWeight = 0;
+            double curentWeight = 0, curentCost = 0;
+      
             foreach (var itm in _items)
             {
                 curentWeight += itm.Weight;
-            }
-            if (curentWeight + item.Weight > _spaceship.MaxWeight) throw new WeightException();
-
-            double curentCost = 0;
-            foreach (var itm in _items)
-            {
                 curentCost += itm.Price;
             }
+                
+
+            if (curentWeight + item.Weight > _spaceship.MaxWeight) throw new WeightException();
             if (curentWeight + item.Price > Budget) throw new BudgetException();
 
             _items.Add(item);
@@ -262,7 +256,7 @@ namespace SpaceMissions
             return curentCost;
         }
 
-        public void Launch()
+        public Mission Launch()
         {
             if (_name is null) throw new ArgumentNullException("name must be not null!");
             if (_budget == 0) throw new ArgumentNullException("budget must be not null!");
@@ -273,6 +267,24 @@ namespace SpaceMissions
 
 
             //СОЗДАНИЕ МИССИЙ
+
+            double totalCost = _items.Sum(a => a.Price);
+
+            switch (_missionType)
+            {
+                case SpaceMissions.MissionType.Colonization:
+                    {
+                        return new ColonizationMission(_id, _name, _astronauts, _spaceship, totalCost, DateTime.Now);
+                    }
+
+                case SpaceMissions.MissionType.Satellite:
+                    {
+                        return new SatelliteMission(_id, _name, _astronauts, _spaceship, totalCost, DateTime.Now);
+                    }
+
+            }
+
+            return null;
         }
 
     }
@@ -282,11 +294,11 @@ namespace SpaceMissions
         private readonly int _id; public int Id { get => _id; }
         private readonly string _name;  public string Name { get => _name; }
         private readonly DateTime _startDate; public DateTime StartDate { get => _startDate; }
-        private DateTime? _endDate; public DateTime? EndDate { get => _endDate; }
+        private DateTime? _endDate; public DateTime? EndDate { get => _endDate; set => _endDate = value; }
         private readonly List<(Person _astronaut, string _role)> _astronauts; public List<(Person _astronaut, string _role)> Astronauts { get => _astronauts; }
         private readonly Spaceship _spaceship; public Spaceship Spaceship { get => _spaceship; }
         private readonly double _totalCost; public double TotalCost { get => _totalCost; }
-        private MissionStatus _missionStatus; public MissionStatus MissionStatus { get => _missionStatus; }
+        private MissionStatus _missionStatus; public MissionStatus MissionStatus { get => _missionStatus; set => _missionStatus = value; }
 
         protected Mission(int id, string name, List<(Person astronaut, string role)> astronauts, Spaceship spaceship, double totalCost, DateTime startDate, MissionStatus status = MissionStatus.Active)
         {
@@ -295,19 +307,21 @@ namespace SpaceMissions
             if (astronauts.Count == 0 || astronauts == null) throw new ArgumentNullException("astronauts must be not null!");
             if (spaceship is null) throw new ArgumentNullException("spaceship must be not null!");
             if (totalCost == 0) throw new ArgumentNullException("budget must be not null!");
-
+            
             if (startDate > DateTime.Now.AddSeconds(10)) 
             {
                 throw new ArgumentException("Incorrect date");
             }
 
-            _id = id; _name = name; _astronauts = astronauts; _astronauts = astronauts; _totalCost = totalCost; _missionStatus = status;  _startDate = startDate;
+            _id = id; _name = name; _astronauts = astronauts; _astronauts = astronauts; _totalCost = totalCost; _missionStatus = status;  _startDate = startDate; _spaceship = spaceship;
         }
         public abstract IMissionDto GetStats();
 
         public void SetStatus(MissionStatus status)
         {
+            if (_missionStatus == MissionStatus.Failed || _missionStatus == MissionStatus.Finished) throw new MissionStatusException();
             _missionStatus=status;
+            if (status == MissionStatus.Failed || status == MissionStatus.Finished) EndDate = DateTime.Now;
         }
 
     }
@@ -334,6 +348,8 @@ namespace SpaceMissions
             }
             else throw new ArgumentException("Mission is not active!");
         }
+
+        //логика работы на орбите
 
         public override IMissionDto GetStats()
         {
@@ -377,27 +393,104 @@ namespace SpaceMissions
 
     }
 
+    public class ColonizationMission : Mission
+    {
+        private List<Colony> _сolonies; public List<Colony> Colonies { get => _сolonies; }
+
+        public ColonizationMission(int id, string name, List<(Person astronaut, string role)> astronauts, Spaceship spaceship, double totalCost, DateTime startDate, MissionStatus status = MissionStatus.Active, params Colony[] colonies)
+          : base(id, name, astronauts, spaceship, totalCost, startDate, MissionStatus.Active)
+        {
+            _сolonies = new List<Colony>(colonies ?? Array.Empty<Colony>());
+        }
+
+        public void DeployColony(string name, DateTime date)
+        {
+            if (name is null) throw new ArgumentNullException("name must be not null!");
+            if (MissionStatus == MissionStatus.Active)
+            {
+                _сolonies.Add(new Colony(name, date));
+            }
+            else throw new ArgumentException("Mission is not active!");
+
+        }
+
+        public void DeployColony(Colony colony)
+        {
+            if (MissionStatus == MissionStatus.Active)
+            {
+                _сolonies.Add(colony);
+            }
+            else throw new ArgumentException("Mission is not active!");
+        }
+
+        public override IMissionDto GetStats()
+        {
+            return new ColonizationMissionDto
+            {
+                Name = this.Name,
+                StartDate = this.StartDate,
+                EndDate = this.EndDate,
+                TravelTime = DateTime.Now - this.StartDate,
+                Status = this.MissionStatus,
+                Astronauts = this.Astronauts.Select(a => new AstronautDto
+                {
+                    Name = a._astronaut.Name,
+                    Role = a._role
+                }).ToList(),
+
+                Colonies = this.Colonies.Select(a => new ColonyDto
+                {
+                    Name = a.Name,
+                    Date = a.StartDate
+                }).ToList(),
+
+                Spaceship = new SpaceshipDto
+                {
+                    Model = this.Spaceship.Model,
+                    MaxSpeed = this.Spaceship.MaxSpeed
+                }
+            };
 
 
+        }
+
+    }
+
+    public class Colony //Класс под расширение
+    {
+        private readonly string _name; public string Name { get => _name; }
+        private readonly DateTime _startDate; public DateTime StartDate { get => _startDate; }
+
+        public Colony(string name, DateTime date)
+        {
+            if (name is null) throw new ArgumentNullException("name must be not null!");
+
+            _name = name; _startDate = date;
+        }
+    }
+
+    public class ColonyDto
+    {
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+    }
+
+    public class ColonizationMissionDto : IMissionDto
+    {
+        public string Name { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public TimeSpan TravelTime { get; set; }
+        public MissionStatus Status { get; set; }
 
 
+        public List<AstronautDto> Astronauts { get; set; }
+        public SpaceshipDto Spaceship { get; set; }
+        public List<ColonyDto> Colonies { get; set; }
 
+        public string ToJson() => JsonSerializer.Serialize(this); //
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 }
 
@@ -416,6 +509,38 @@ namespace SpaceMissionAnalyzer
     {
         static void Main(string[] args)
         {
+
+            Person p1 = new Person(1, "Ivanov");
+            Person p2 = new Person(2, "Petrov");
+
+            Spaceship sp = new Spaceship(1, "Rocket-121", 1000, 200, 10);
+
+            PrepareMission someMission = new PrepareMission(202, "ColonizationMars2025", MissionType.Colonization, sp,null,null,1000); //Weight - 1000, budget - 1000
+
+            Item expItm = new Item(10, "EXPENSIVE_ITEM", 100, 5000);
+            Item bigItm = new Item(12, "BIG_ITEM", 10000, 500);
+            Item Itm = new Item(13, "Some_item", 100, 100);
+
+           // someMission.AddItem(expItm);
+           // someMission.AddItem(bigItm);
+            someMission.AddItem(Itm);
+            someMission.AddAstronaut(p1, "Capitan");
+            someMission.AddAstronaut(p2, "Helper");
+            ColonizationMission clMs; ColonizationMissionDto dto1;
+            try
+            {
+                clMs = (ColonizationMission)someMission.Launch();
+                dto1 = (ColonizationMissionDto)clMs.GetStats();
+                
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("error1");
+            }
+
+            int a = 2;
+            int b = 3; 
         }
     }
 }
