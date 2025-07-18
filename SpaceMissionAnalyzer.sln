@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13 d17.14
+VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMissionAnalyzer", "SpaceMissionAnalyzer\SpaceMissionAnalyzer.csproj", "{BB651CF9-F1FE-42A7-BE73-FD5FAB6E69BD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonTests", "PersonTests\PersonTests.csproj", "{305C68D3-134F-4D63-B73E-53F2C6C9D0B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceMissionAnalizer", "SpaceMissionAnalizer\SpaceMissionAnalizer.csproj", "{FFD96B75-82DD-4B35-BA6B-AC969FB85176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceshipTests", "SpaceshipTests\SpaceshipTests.csproj", "{A03E8172-B167-4315-B314-85B292E8747E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemTests", "ItemTests\ItemTests.csproj", "{5A3C66A3-B6EA-4FB9-8E06-48AB30F9FBDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareMissionTests", "PrepareMissionTests\PrepareMissionTests.csproj", "{ACA690CC-B30C-44BD-A6B5-26F62B96343B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +21,35 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BB651CF9-F1FE-42A7-BE73-FD5FAB6E69BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB651CF9-F1FE-42A7-BE73-FD5FAB6E69BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB651CF9-F1FE-42A7-BE73-FD5FAB6E69BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB651CF9-F1FE-42A7-BE73-FD5FAB6E69BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{305C68D3-134F-4D63-B73E-53F2C6C9D0B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{305C68D3-134F-4D63-B73E-53F2C6C9D0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{305C68D3-134F-4D63-B73E-53F2C6C9D0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{305C68D3-134F-4D63-B73E-53F2C6C9D0B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFD96B75-82DD-4B35-BA6B-AC969FB85176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFD96B75-82DD-4B35-BA6B-AC969FB85176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFD96B75-82DD-4B35-BA6B-AC969FB85176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFD96B75-82DD-4B35-BA6B-AC969FB85176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03E8172-B167-4315-B314-85B292E8747E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03E8172-B167-4315-B314-85B292E8747E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03E8172-B167-4315-B314-85B292E8747E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03E8172-B167-4315-B314-85B292E8747E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A3C66A3-B6EA-4FB9-8E06-48AB30F9FBDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A3C66A3-B6EA-4FB9-8E06-48AB30F9FBDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A3C66A3-B6EA-4FB9-8E06-48AB30F9FBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A3C66A3-B6EA-4FB9-8E06-48AB30F9FBDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA690CC-B30C-44BD-A6B5-26F62B96343B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA690CC-B30C-44BD-A6B5-26F62B96343B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA690CC-B30C-44BD-A6B5-26F62B96343B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA690CC-B30C-44BD-A6B5-26F62B96343B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{305C68D3-134F-4D63-B73E-53F2C6C9D0B6} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{A03E8172-B167-4315-B314-85B292E8747E} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{5A3C66A3-B6EA-4FB9-8E06-48AB30F9FBDE} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{ACA690CC-B30C-44BD-A6B5-26F62B96343B} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E195102-EB58-4802-BB67-5353899CB695}

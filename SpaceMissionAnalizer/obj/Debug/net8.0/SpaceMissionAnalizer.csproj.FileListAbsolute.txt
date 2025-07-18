@@ -1,0 +1,15 @@
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\bin\Debug\net8.0\SpaceMissionAnalizer.exe
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\bin\Debug\net8.0\SpaceMissionAnalizer.deps.json
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\bin\Debug\net8.0\SpaceMissionAnalizer.runtimeconfig.json
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\bin\Debug\net8.0\SpaceMissionAnalizer.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\bin\Debug\net8.0\SpaceMissionAnalizer.pdb
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.AssemblyInfoInputs.cache
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.AssemblyInfo.cs
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.csproj.CoreCompileInputs.cache
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.sourcelink.json
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\refint\SpaceMissionAnalizer.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.pdb
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\SpaceMissionAnalizer.genruntimeconfig.cache
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalizer\obj\Debug\net8.0\ref\SpaceMissionAnalizer.dll

@@ -27,3 +27,11 @@ C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\obj\Debug\
 C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\obj\Debug\SpaceMissionAnalyzer.exe
 C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\obj\Debug\SpaceMissionAnalyzer.pdb
 C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\obj\Debug\SpaceMissionAnalyzer.exe.config
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\Castle.Core.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\Moq.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\nunit.framework.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\nunit.framework.legacy.dll
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\Castle.Core.xml
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\nunit.framework.xml
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\bin\Debug\nunit.framework.legacy.xml
+C:\Users\Shapi\Source\Repos\SpaceMissionAnalyzer\SpaceMissionAnalyzer\obj\Debug\SpaceMissionAnalyzer.csproj.SuggestedBindingRedirects.cache

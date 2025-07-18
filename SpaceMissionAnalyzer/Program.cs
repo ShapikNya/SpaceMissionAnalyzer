@@ -720,6 +720,8 @@ namespace SpaceMissions
                 Console.WriteLine($"Результат: {res.TotalDays} дней)");
 
                 ////
+
+                Person p = new Person(-1, "str");
             }
         }
     }
