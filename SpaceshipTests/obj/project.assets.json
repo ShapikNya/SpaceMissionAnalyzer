@@ -378,14 +378,14 @@
           }
         }
       },
-      "SpaceMissionAnalizer/1.0.0": {
+      "SpaceMissionAnalyzer/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "compile": {
-          "bin/placeholder/SpaceMissionAnalizer.dll": {}
+          "bin/placeholder/SpaceMissionAnalyzer.dll": {}
         },
         "runtime": {
-          "bin/placeholder/SpaceMissionAnalizer.dll": {}
+          "bin/placeholder/SpaceMissionAnalyzer.dll": {}
         }
       }
     }
@@ -981,19 +981,20 @@
         "version.txt"
       ]
     },
-    "SpaceMissionAnalizer/1.0.0": {
+    "SpaceMissionAnalyzer/1.0.0": {
       "type": "project",
-      "path": "../SpaceMissionAnalizer/SpaceMissionAnalizer.csproj",
-      "msbuildProject": "../SpaceMissionAnalizer/SpaceMissionAnalizer.csproj"
+      "path": "../SpaceMissionAnalizer/SpaceMissionAnalyzer.csproj",
+      "msbuildProject": "../SpaceMissionAnalizer/SpaceMissionAnalyzer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
       "NUnit >= 3.14.0",
       "NUnit.Analyzers >= 3.9.0",
       "NUnit3TestAdapter >= 4.5.0",
-      "SpaceMissionAnalizer >= 1.0.0",
+      "SpaceMissionAnalyzer >= 1.0.0",
       "coverlet.collector >= 6.0.0"
     ]
   },
@@ -1031,6 +1032,9 @@
           "projectReferences": {
             "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {
               "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj"
+            },
+            "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj": {
+              "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj"
             }
           }
         }
@@ -1091,5 +1095,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Не удалось найти проект \"C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj\". Убедитесь, что ссылка на проект действительна и файл проекта существует.",
+      "libraryId": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

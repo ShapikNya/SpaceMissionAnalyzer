@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {
-                "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj"
+              "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj": {
+                "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj"
               }
             }
           }
@@ -95,12 +95,12 @@
         }
       }
     },
-    "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {
+    "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
-        "projectName": "SpaceMissionAnalizer",
-        "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
+        "projectUniqueName": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj",
+        "projectName": "SpaceMissionAnalyzer",
+        "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj",
         "packagesPath": "C:\\Users\\Shapi\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\obj\\",
         "projectStyle": "PackageReference",

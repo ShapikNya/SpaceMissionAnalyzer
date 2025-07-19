@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {}
+    "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer — копия\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {
+    "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer — копия\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
+        "projectUniqueName": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer — копия\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
         "projectName": "SpaceMissionAnalizer",
-        "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
+        "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer — копия\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
         "packagesPath": "C:\\Users\\Shapi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\obj\\",
+        "outputPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer — копия\\SpaceMissionAnalizer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

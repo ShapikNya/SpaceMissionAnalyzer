@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SpaceMissionAnalizer\SpaceMissionAnalizer.csproj" />
+    <ProjectReference Include="..\SpaceMissionAnalizer\SpaceMissionAnalyzer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

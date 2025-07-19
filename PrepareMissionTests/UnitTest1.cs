@@ -30,7 +30,7 @@ namespace PrepareMissionTests
         //prop set
         [Test]
         [TestCaseSource(nameof(InvalidItemsSetTestCases))]
-        public void GIVEN_CorrectParameter_WHEN_ItemsSet_THEN_ThrowsException(int id, string name, double weight, double price)
+        public void GIVEN_InvalidParameter_WHEN_ItemsSet_THEN_ThrowsException(int id, string name, double weight, double price)
         {
             List<Item> itm = new List<Item>() { new Item(id, name, weight, price) };
             PrepareMission ms = new PrepareMission(1);
@@ -92,10 +92,20 @@ namespace PrepareMissionTests
             }
 
         }
-        
-            
 
-
+        [Test]
+        [TestCaseSource(nameof(MissionWithInvalidPropertys))]
+        public void GIVEN_InvalidPropertys_WHEN_MissionLaunch_THEN_ThrowsException(PrepareMission mission)
+        { 
+            try
+            {
+                mission.Launch(); Assert.Fail("ќжидалось исключение, но оно не было выброшено.");
+            }
+            catch
+            {
+                Assert.Pass();
+            }
+        }
 
 
 
@@ -206,6 +216,27 @@ namespace PrepareMissionTests
                 100000);
         }
 
+        private static IEnumerable<PrepareMission> MissionWithInvalidPropertys()
+        {
+            yield return new PrepareMission(
+                1,
+                "Mission",
+                MissionType.Satellite,
+                new Spaceship(1, "Falcon", 200, 200, 200),
+                new List<Item> { new Item(1, "Oxygen", 50) },
+                new List<(Person, string)>(),
+                10000
+            );
+
+            yield return new PrepareMission(
+                1,
+                "Mission",
+                default,
+                new Spaceship(1, "Falcon", 200, 200, 200),
+                new List<Item>(),
+                new List<(Person, string)> { (new Person(1, "Ivan"), "pilot") },
+                10000);
+        }
 
 
 

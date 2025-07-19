@@ -299,7 +299,7 @@ namespace SpaceMissions
         private readonly List<(Person _astronaut, string _role)> _astronauts; public List<(Person _astronaut, string _role)> Astronauts { get => _astronauts; }
         private readonly Spaceship _spaceship; public Spaceship Spaceship { get => _spaceship; }
         private readonly double? _totalCost; public double? TotalCost { get => _totalCost; }
-        private MissionStatus _missionStatus; public MissionStatus MissionStatus { get => _missionStatus; set { EnsureMissionIsActive(); SetStatus(value); } }
+        private MissionStatus _missionStatus; public MissionStatus MissionStatus { get => _missionStatus; set { SetStatus(value); } }
 
         protected Mission(MissionType missionType, int id, string name, List<(Person astronaut, string role)> astronauts, Spaceship spaceship, double? totalCost, DateTime startDate, MissionStatus status = MissionStatus.Active)
         {
@@ -314,14 +314,15 @@ namespace SpaceMissions
                 throw new ArgumentException("Incorrect date");
             }
 
-            _missionType = missionType; _id = id; _name = name; _astronauts = astronauts; _astronauts = astronauts; _totalCost = totalCost; _missionStatus = status; _startDate = startDate; _spaceship = spaceship;
+            _missionType = missionType; _id = id; _name = name; _astronauts = astronauts; _astronauts = astronauts; _totalCost = totalCost; SetStatus(status); _startDate = startDate; _spaceship = spaceship;
         }
         public abstract IMissionDto GetStats();
 
         public void SetStatus(MissionStatus status)
         {
             EnsureMissionIsActive();
-            if (status == MissionStatus.Failed || status == MissionStatus.Finished) EndDate = DateTime.Now; _missionStatus = status;
+            EndDate = DateTime.Now;
+            _missionStatus = status;
         }
 
         protected void EnsureMissionIsActive()
@@ -601,26 +602,26 @@ namespace SpaceMissions
         {
             return _missions.Where(m => m.StartDate >= date);
         }
-        public Dictionary<Mission, TimeSpan> GetLongMission()
+        public Dictionary<Mission, TimeSpan> GetLongMission(int count)
         {
             return _missions
                 .Where(mission => mission.EndDate != null)
                 .OrderByDescending(mission => mission.EndDate - mission.StartDate)
-                .Take(5)
+                .Take(count)
                 .ToDictionary(
                     mission => mission,
                     mission => mission.EndDate.Value - mission.StartDate
                 );
         }
 
-        public async Task<Dictionary<Mission, TimeSpan>> GetLongMissionAsync(CancellationToken token = default)
+        public async Task<Dictionary<Mission, TimeSpan>> GetLongMissionAsync(int count,CancellationToken token = default)
         {
             await Task.Delay(10000, token); //CPU вычисления
 
             return await Task.Run(() => _missions.AsParallel()
                 .Where(mission => mission.EndDate != null)
                 .OrderByDescending(mission => mission.EndDate - mission.StartDate)
-                .Take(5)
+                .Take(count)
                 .ToDictionary(
                     mission => mission,
                     mission => mission.EndDate.Value - mission.StartDate

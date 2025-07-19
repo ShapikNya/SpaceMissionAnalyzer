@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
-      "projectName": "SpaceMissionAnalizer",
-      "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalizer.csproj",
+      "projectUniqueName": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj",
+      "projectName": "SpaceMissionAnalyzer",
+      "projectPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\SpaceMissionAnalyzer.csproj",
       "packagesPath": "C:\\Users\\Shapi\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Shapi\\Source\\Repos\\SpaceMissionAnalyzer\\SpaceMissionAnalizer\\obj\\",
       "projectStyle": "PackageReference",
